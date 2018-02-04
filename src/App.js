@@ -4,6 +4,33 @@ import './App.css';
 
 
 class City extends Component{
+  constructor(props)
+  {
+    super(props)    
+    this.state={coord: ["",""], iteration:0}
+    //bind your instance method to the method itself to update data.
+    this.GetByCity = this.GetByCity.bind(this);
+  }
+  componentDidMount(){
+  // For initial data
+    this.GetByCity();
+  }
+  //London ID 6058560
+  GetByCity() {
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=71c31da7413938a93700ab6547f02be4')
+    .then((response) =>  {
+      return response.json()
+    })
+    .then((data)=>{
+      this.setState({coord: data.coord})
+    })
+    .catch((error)=> {
+      console.error(error);
+    });
+    this.setState(prevState=>({
+      iteration: prevState.iteration + 1
+    }));
+  }
   render(){
     return(
       <div name="info">
@@ -12,6 +39,16 @@ class City extends Component{
         </p>
         <p>
           {this.props.temp}
+        </p>
+        <button onClick={this.GetByCity}>By City</button>
+       <p>
+          {this.state.coord}
+        </p>
+        <p>
+          {this.state.coord}
+        </p>
+        <p>
+          {this.state.iteration}
         </p>
       </div>
     );

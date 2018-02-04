@@ -42,10 +42,10 @@ class City extends Component{
         </p>
         <button onClick={this.GetByCity}>By City</button>
        <p>
-          {this.state.coord}
+          {this.state.coord.lon}
         </p>
         <p>
-          {this.state.coord}
+          {this.state.coord.lat}
         </p>
         <p>
           {this.state.iteration}
